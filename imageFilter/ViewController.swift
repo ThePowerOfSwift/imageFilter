@@ -49,6 +49,7 @@ extension UIImage {
         
         ///進行遮罩把不算太黑的顏色都蓋成透明
         let imageWithoutBrown = masklightToMidRangeBrown(inputImage: self)!
+//        return imageWithoutBrown
         
         ///進行對比等等的調整使其只剩下黑白兩色
         if let imageConvertBlackWhite = getScannedImage(inputImage: imageWithoutBrown) {
@@ -59,7 +60,7 @@ extension UIImage {
     }
     
     private func masklightToMidRangeBrown(inputImage: UIImage) -> UIImage? {
-        let myColorMaskedImage = inputImage.cgImage?.copy(maskingColorComponents: [100, 180,  100, 180, 20, 180])!  //[124, 255,  68, 222, 0, 165]
+        let myColorMaskedImage = inputImage.cgImage?.copy(maskingColorComponents: [100, 180,  100, 180, 20, 180])!  //[100, 180,  100, 180, 20, 180] //[124, 255,  68, 222, 0, 165]
         let context = CIContext()
         let temp = convertCGImageToCIImage(cgImage: myColorMaskedImage!)
         if let cgimg = context.createCGImage(temp, from: temp.extent) {
